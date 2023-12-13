@@ -44,7 +44,7 @@
                                             <ul class="nice-scroll">
                                                 <li><a href="{% url 'store'%}">All Products ({{all_product_count}})</a></li>
                                                 {% for category in links %}
-                                                <li><a href="{{category.get_url}}">{{category}} ({{product_count}})</a></li>
+                                                <li><a href="{{category.get_url}}">{{category}} (20)</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -211,7 +211,7 @@
                                     <li><a href="#"><img src="{% static 'img/icon/heart.png'%}" alt=""></a></li>
                                     <li><a href="#"><img src="{% static 'img/icon/compare.png'%}" alt="">
                                             <span>Compare</span></a></li>
-                                    <li><a href="#"><img src="{% static 'img/icon/search.png'%}" alt=""></a></li>
+                                    <li><a href="{{product.get_absolute_url}}"><img src="{% static 'img/icon/details.png'%}" alt=""></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Product(models.Model):
@@ -10,9 +11,12 @@ class Product(models.Model):
     discount = models.IntegerField(default=0)
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
-    category = models.ForeignKey("category.Category", verbose_name=("category product"), on_delete=models.CASCADE)
+    category = models.ForeignKey("category.Category",related_name=("product"), verbose_name=("category product"), on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateField( auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse("product_detail", args=[self.category.slug ,self.slug])
 
 
     def __str__(self):
