@@ -2,6 +2,8 @@ from django.shortcuts import render , get_object_or_404
 from .models import Product
 from category.models import Category
 from django.db.models import Count
+from django.views.generic import ListView 
+from django.db.models.query_utils import Q
 
 # Create your views here.
 def store(request , category_slug=None):
@@ -37,3 +39,22 @@ def product_detail(request , category_slug , product_slug):
         'related':related,
     }
     return render(request , 'product/product_detail.html', context)
+
+class ProductByTags(ListView):
+    model = Product
+    template_name = 'tags/store.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["product"] = Product.objects.all()
+        context["all_product_count"] = Product.objects.all().count()
+
+        return context
+
+
+    def get_queryset(self) :
+        slug = self.kwargs['slug']
+        object_list = Product.objects.filter(
+            Q(tags__name__icontains = slug)
+        )
+        return object_list
