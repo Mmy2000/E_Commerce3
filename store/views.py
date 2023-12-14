@@ -23,7 +23,7 @@ def store(request , category_slug=None):
         product_count = products.count()
     else:
         products = Product.objects.all().filter(is_available=True).order_by('id')
-        paginator = Paginator(products,2)  # Show 25 contacts per page.
+        paginator = Paginator(products,12)  # Show 25 contacts per page.
 
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
