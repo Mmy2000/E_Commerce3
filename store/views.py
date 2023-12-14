@@ -30,6 +30,24 @@ def store(request , category_slug=None):
     }
     return render(request , 'product/store.html' , context)
 
+class Search(ListView):
+    model = Product
+    template_name = 'tags/store.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["product"] = Product.objects.all()
+        context["all_product_count"] = Product.objects.all().count()
+        context["tags"] = Tag.objects.all()
+
+        return context
+    def get_queryset(self) :
+        q = self.request.GET.get('q')
+        object_list = Product.objects.filter(
+            Q(name__icontains = q) |
+            Q(description__icontains = q))        
+        return object_list
+
 def product_detail(request , category_slug , product_slug):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
