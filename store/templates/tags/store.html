@@ -238,11 +238,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">21</a>
+                            {% if page_obj.has_previous %}
+                            <a class="active" href="?page={{page_obj.previous_page_number}}">&lt;</a>
+                            {% else %}
+                            <a class="active">&lt;</a>
+                            {% endif %}
+                            {% for i in paginator.page_range  %}
+                            {% if page_obj.number == i %}
+                            <a class="active" >{{i}}</a>
+                            {% else %}
+                                <a href="?page={{i}}">{{i}}</a>
+                            {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <a class="active" href="?page={{page_obj.next_page_number}}">&gt;</a>
+                            {% else %}
+                            <a class="active">&gt;</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

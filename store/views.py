@@ -23,7 +23,7 @@ def store(request , category_slug=None):
         product_count = products.count()
     else:
         products = Product.objects.all().filter(is_available=True).order_by('id')
-        paginator = Paginator(products,12)  # Show 25 contacts per page.
+        paginator = Paginator(products,2)  # Show 25 contacts per page.
 
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -73,6 +73,7 @@ def product_detail(request , category_slug , product_slug):
 
 class ProductByTags(ListView):
     model = Product
+    paginate_by = 2
     template_name = 'tags/store.html'
     
     def get_context_data(self, **kwargs):
