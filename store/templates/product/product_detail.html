@@ -143,7 +143,7 @@
                             <img src="img/shop-details/details-payment.png" alt="">
                             <ul>
                                 <li><span>SKU:</span> 3812912</li>
-                                <li><span>Categories:</span> {{single_product.category}}</li>
+                                <li><span>Categories:</span><a href="{{single_product.category.get_url}}"> {{single_product.category}} </a></li>
                                 {% if single_product.tags.all %}
                                 <li><span>Tag:</span> {% for tag in single_product.tags.all %}<a href="{% url 'product_by_tags' tag %}">{{tag}}</a> {% endfor %}</li>
                                 {% else %}
