@@ -144,7 +144,10 @@
                             <ul>
                                 <li><span>SKU:</span> 3812912</li>
                                 <li><span>Categories:</span> {{single_product.category}}</li>
-                                <li><span>Tag:</span> Clothes, Skin, Body</li>
+                                {% if single_product.tags.all %}
+                                <a href=""><li><span>Tag:</span> {% for tag in single_product.tags.all %}{{tag}} {% endfor %}</li></a>
+                                {% else %}
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

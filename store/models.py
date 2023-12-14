@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from taggit.managers import TaggableManager
+
 
 # Create your models here.
 class Product(models.Model):
@@ -11,6 +13,7 @@ class Product(models.Model):
     discount = models.IntegerField(default=0)
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
+    tags = TaggableManager()
     category = models.ForeignKey("category.Category",related_name=("product"), verbose_name=("category product"), on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateField( auto_now=True)
