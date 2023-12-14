@@ -28,10 +28,12 @@ def store(request , category_slug=None):
 def product_detail(request , category_slug , product_slug):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+        related = Product.objects.filter(category=single_product.category)
     except Exception as e:
         raise e
 
     context = {
         'single_product': single_product,
+        'related':related,
     }
     return render(request , 'product/product_detail.html', context)
