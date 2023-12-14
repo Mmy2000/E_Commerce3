@@ -44,7 +44,7 @@
                                             <ul class="nice-scroll">
                                                 <li><a href="{% url 'store'%}">All Products ({{all_product_count}})</a></li>
                                                 {% for category in links %}
-                                                <li><a href="{{category.get_url}}">{{category}} (20)</a></li>
+                                                <li><a href="{{category.get_url}}">{{category}} ({{category.products_count}})</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
