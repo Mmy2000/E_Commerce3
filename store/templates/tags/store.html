@@ -167,13 +167,9 @@
                                 <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="shop__sidebar__tags">
-                                            <a href="#">Product</a>
-                                            <a href="#">Bags</a>
-                                            <a href="#">Shoes</a>
-                                            <a href="#">Fashio</a>
-                                            <a href="#">Clothing</a>
-                                            <a href="#">Hats</a>
-                                            <a href="#">Accessories</a>
+                                            {% for tag in tags %}
+                                            <a href="{% url 'product_by_tags' tag%}">{{tag}}</a>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>

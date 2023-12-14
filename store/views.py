@@ -4,6 +4,7 @@ from category.models import Category
 from django.db.models import Count
 from django.views.generic import ListView 
 from django.db.models.query_utils import Q
+from taggit.models import Tag
 
 # Create your views here.
 def store(request , category_slug=None):
@@ -19,11 +20,13 @@ def store(request , category_slug=None):
         product_count = products.count()
     product = Product.objects.all().filter(is_available=True).order_by('id')
     all_product_count = product.count()
+    tags = Tag.objects.all()
 
     context = {
         'products':products,
         'product_count': product_count,
         'all_product_count':all_product_count,
+        'tags':tags,
     }
     return render(request , 'product/store.html' , context)
 
@@ -48,6 +51,7 @@ class ProductByTags(ListView):
         context = super().get_context_data(**kwargs)
         context["product"] = Product.objects.all()
         context["all_product_count"] = Product.objects.all().count()
+        context["tags"] = Tag.objects.all()
 
         return context
 
