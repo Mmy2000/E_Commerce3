@@ -42,6 +42,7 @@ def store(request , category_slug=None):
 
 class Search(ListView):
     model = Product
+    paginate_by = 12
     template_name = 'tags/store.html'
 
     def get_context_data(self, **kwargs):
@@ -73,7 +74,7 @@ def product_detail(request , category_slug , product_slug):
 
 class ProductByTags(ListView):
     model = Product
-    paginate_by = 2
+    paginate_by = 12
     template_name = 'tags/store.html'
     
     def get_context_data(self, **kwargs):
