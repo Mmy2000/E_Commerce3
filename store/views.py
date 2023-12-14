@@ -5,6 +5,8 @@ from django.db.models import Count
 from django.views.generic import ListView 
 from django.db.models.query_utils import Q
 from taggit.models import Tag
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def store(request , category_slug=None):
@@ -14,16 +16,24 @@ def store(request , category_slug=None):
     if category_slug != None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=categories, is_available=True)
+        paginator = Paginator(products, 12)  # Show 25 contacts per page.
+
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
         product_count = products.count()
     else:
         products = Product.objects.all().filter(is_available=True).order_by('id')
+        paginator = Paginator(products,12)  # Show 25 contacts per page.
+
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
         product_count = products.count()
     product = Product.objects.all().filter(is_available=True).order_by('id')
     all_product_count = product.count()
     tags = Tag.objects.all()
 
     context = {
-        'products':products,
+        'products':page_obj,
         'product_count': product_count,
         'all_product_count':all_product_count,
         'tags':tags,
