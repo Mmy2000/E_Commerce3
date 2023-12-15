@@ -61,14 +61,6 @@ def remove_cart_item(request , product_id):
     
     return redirect('cart')
 
-def update(request , product_id):
-    product = get_object_or_404(Product,id=product_id)
-    cart = Cart.objects.get(cart_id=_cart_id(request))
-    cart_item = CartItem.objects.get(product=product , cart=cart )
-    if 'quantity' in request.GET:
-        cart_item.quantity = request.GET['quantity']
-        cart_item.save()
-    return redirect('cart')
 
 def cart(request ,total=0 ,quantity=0,cart_items=None):
     try:

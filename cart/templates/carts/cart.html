@@ -56,11 +56,16 @@
                                 <td class="quantity__item">
 
                                     <div class="quantity">
-                                        <form action="{% url 'update' cart_item.product.id %}" method="GET">
+                                        <a href="{% url 'add_cart' cart_item.product.id %}"><i
+                                                class="fa fa-plus"></i></a>
                                             <div class="pro-qty-2">
-                                                <input type="text" name="quantity" value="{{cart_item.quantity}}">
+                                                <input type="text"  value="{{cart_item.quantity}}">
                                             </div>
+
+                                            <a href="{% url 'remove_cart' cart_item.product.id %}"><i
+                                                    class="fa fa-minus"></i></a>
                                     </div>
+
                                 </td>
                                 <td class="cart__price">$ {{cart_item.sub_total}}</td>
                                 <td class="cart__close"><a href="{% url 'remove_cart_item' cart_item.product.id %}"><i
@@ -76,12 +81,6 @@
                             <a href="{%  url 'store' %}">Continue Shopping</a>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="continue__btn update__btn">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-spinner"></i> Update cart</button>
-                        </div>
-                    </div>
-                    </form>
                 </div>
             </div>
             <div class="col-lg-4">
