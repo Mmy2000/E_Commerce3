@@ -36,17 +36,19 @@
                             <p>{{single_product.description}}</p>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
-                                    <select name="size" >
-                                        <option value="small">small</option>
-                                        <option value="meduim">meduim</option>
-                                        <option value="large">large</option>
+                                    <select name="size" required >
+                                        <option value="" disabled selected>Choose Size</option>
+                                        {% for i in single_product.variation_set.sizes %}
+                                        <option value="{{i.variation_value}}">{{i.variation_value}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="product__details__option__size">
-                                    <select name="color">
-                                        <option value="red">red</option>
-                                        <option value="blue">blue</option>
-                                        <option value="black">black</option>
+                                    <select name="color" required>
+                                        <option value="" disabled selected>Choose Color</option>
+                                        {% for i in single_product.variation_set.colors %}
+                                        <option value="{{i.variation_value}}">{{i.variation_value}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
