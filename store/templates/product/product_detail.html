@@ -18,7 +18,7 @@
     </div>
     <div class="product__details__content">
         <div class="container">
-            <form method="GET" action="{% url 'add_cart' single_product.id %}">
+            <form method="POST" action="{% url 'add_cart' single_product.id %}">
                 {% csrf_token %}
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
@@ -39,7 +39,7 @@
                                     <select name="size" required >
                                         <option value="" disabled selected>Choose Size</option>
                                         {% for i in single_product.variation_set.sizes %}
-                                        <option value="{{i.variation_value}}">{{i.variation_value}}</option>
+                                        <option value="{{i.variation_value|lower}}"> {{i.variation_value|capfirst}}
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -47,7 +47,7 @@
                                     <select name="color" required>
                                         <option value="" disabled selected>Choose Color</option>
                                         {% for i in single_product.variation_set.colors %}
-                                        <option value="{{i.variation_value}}">{{i.variation_value}}</option>
+                                        <option value="{{i.variation_value|lower}}"> {{i.variation_value|capfirst}}
                                         {% endfor %}
                                     </select>
                                 </div>
