@@ -33,3 +33,18 @@ class ProductImages(models.Model):
 
     def __str__(self):
         return str(self.product)
+    
+variation_category_choice=(
+    ('color','color'),
+    ('size','size'),
+)
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product,  on_delete=models.CASCADE)
+    variation_category = models.CharField( max_length=200 , choices=variation_category_choice)
+    variation_value = models.CharField( max_length=200 )
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(  auto_now_add=True)
+
+    def __str__(self):
+        return self.variation_value
